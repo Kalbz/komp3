@@ -1,0 +1,3 @@
+Lexical errors found! See the logs below: 
+@error at line 3. Unrecognized string literal "Hello".
+@error at line 4. Cannot generate a syntax for this input: syntax error, unexpected PRINTLN, expecting RCB

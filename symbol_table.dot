@@ -1,0 +1,4 @@
+digraph SymbolTable {
+  rankdir=LR;
+  class0 [shape=record,label="{E|Fields\l|Methods\l  void main(String[] a)\l}"];
+}

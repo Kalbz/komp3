@@ -1,0 +1,2 @@
+Character "Hello" is not recognized
+Syntax errors found! See the logs below: 
