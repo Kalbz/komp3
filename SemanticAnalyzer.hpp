@@ -55,7 +55,7 @@ private:
     std::string mainClassName;
     std::vector<std::string> errors;
 
-    // Symbol table construction helpers
+    // symbol table construction helpers
     void reset();
     void buildGoal(Node *goal);
     void buildMainClass(Node *mainClass);
@@ -69,7 +69,7 @@ private:
     void collectStatementsForLocals(Node *node, MethodInfo &method, const std::string &scopeName);
     void validateTypeReferences();
 
-    // Semantic analysis helpers
+    // semantic analysis helpers
     void analyzeClass(const ClassInfo &cls);
     void analyzeMethod(const ClassInfo &cls, const MethodInfo &method);
     void analyzeBody(Node *body, const ClassInfo &cls, const MethodInfo &method);
@@ -82,12 +82,12 @@ private:
     std::string analyzeIndexExpression(Node *indexNode, const ClassInfo &cls, const MethodInfo &method, bool isAssignmentLhs);
     std::vector<std::string> analyzeArguments(Node *argsNode, const ClassInfo &cls, const MethodInfo &method);
 
-    // Lookup helpers
+    // lookup helpers
     std::string lookupVariable(const ClassInfo &cls, const MethodInfo &method, const std::string &name, int line);
     const MethodInfo *lookupMethod(const std::string &className, const std::string &methodName) const;
     const ClassInfo *lookupClass(const std::string &className) const;
 
-    // Utilities
+    // utilities
     static std::string makeTypeFromNode(Node *typeNode);
     static int nodeLine(Node *node);
     static bool isPrimitive(const std::string &typeName);

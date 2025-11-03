@@ -34,7 +34,7 @@ bool isNumber(const string &value) {
     return true;
 }
 
-} // namespace
+} 
 
 CppCodeGenerator::CppCodeGenerator(const SemanticAnalyzer &semanticAnalyzer,
                                    const ir::Module &module)
@@ -119,7 +119,7 @@ string CppCodeGenerator::mapType(const string &type) const {
     if (isClassType(type)) {
         return pointerType(type);
     }
-    // Fallback: treat unknown custom types as int handles.
+    // treat unknown custom types as int handles.
     return "int";
 }
 
@@ -146,7 +146,7 @@ bool CppCodeGenerator::writeToFile(const string &filename) {
     }
     sort(classOrder.begin(), classOrder.end());
 
-    // Struct definitions
+    // struct definitions
     for (const auto &className : classOrder) {
         const ClassInfo &cls = classes.at(className);
         out << "struct " << structName(className) << " {\n";
@@ -187,7 +187,7 @@ bool CppCodeGenerator::writeToFile(const string &filename) {
         return signature;
     };
 
-    // Forward declarations (constructors + methods)
+    // forward declarations (constructors + methods)
     vector<string> prototypes;
     prototypes.reserve(classOrder.size() * 2);
     for (const auto &className : classOrder) {
@@ -215,7 +215,7 @@ bool CppCodeGenerator::writeToFile(const string &filename) {
         out << "\n";
     }
 
-    // Constructor definitions
+    // constructor definitions
     for (const auto &className : classOrder) {
         out << pointerType(className) << " " << functionName(className, "ctor") << "() {\n";
         out << "    " << pointerType(className) << " obj = new " << structName(className) << "();\n";

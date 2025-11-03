@@ -676,7 +676,7 @@ void SemanticAnalyzer::analyzeStatement(Node *stmt, const ClassInfo &cls, const 
         return;
     }
 
-    // Fallback: traverse children to ensure nested statements are analyzed
+    // fallback to traverse children to ensure nested statements are analyzed
     for (auto *child : stmt->children) {
         if (child) {
             analyzeStatement(child, cls, method);
@@ -848,7 +848,6 @@ std::string SemanticAnalyzer::analyzeExpression(Node *expr, const ClassInfo &cls
     }
 
     if (!expr->children.empty()) {
-        // Container nodes: analyze first child and propagate type
         if (expr->children.size() == 1) {
             return analyzeExpression(expr->children[0], cls, method);
         }

@@ -199,7 +199,7 @@ void dumpDot(const Module &module, ostream &out) {
             out << "\"];\n";
         }
 
-        // Edges for control flow.
+        // edges for control flow.
         for (const auto &blockPtr : fnPtr->blocks) {
             if (!blockPtr) {
                 continue;

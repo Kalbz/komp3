@@ -118,7 +118,7 @@ void IRGenerator::generateForMethod(const ClassInfo &cls, const MethodInfo &meth
     IR_DEBUG_LOG("Entering function " << qualifiedName);
     generateBody(method.body);
 
-    // Ensure functions that have no explicit return end with one.
+    // ensure functions that have no explicit return end with one.
     if (!method.isMain && method.returnType != "void") {
         bool hasReturn = false;
         for (const auto &blockPtr : currentFunction->blocks) {
@@ -154,7 +154,7 @@ void IRGenerator::generateBody(Node *bodyNode) {
         } else if (child->type == "Return") {
             generateReturn(child);
         } else if (child->type == "VarDeclaration") {
-            // Locals already collected; no IR emitted.
+            // locals already collected; no IR emitted.
             IR_DEBUG_LOG("Skipping VarDeclaration in body for IR.");
         } else {
             generateStatement(child);
@@ -210,7 +210,7 @@ void IRGenerator::generateStatement(Node *statementNode) {
         return;
     }
 
-    // Fallback: attempt to interpret as nested statement container.
+    // attempt to interpret as nested statement container.
     for (auto *child : statementNode->children) {
         generateStatement(child);
     }
@@ -291,7 +291,7 @@ void IRGenerator::generateIf(Node *node) {
     }
     currentBlock->trueExit = thenBlock;
 
-    // Then branch
+    // then branch
     currentBlock = thenBlock;
     if (thenNode) {
         generateStatementList(thenNode);
@@ -299,7 +299,7 @@ void IRGenerator::generateIf(Node *node) {
     currentBlock->instructions.emplace_back(ir::Opcode::Goto, "", "", "", joinBlock->name);
     currentBlock->trueExit = joinBlock;
 
-    // Else branch if exists
+    // else branch if exists
     if (elseBlock) {
         currentBlock = elseBlock;
         generateStatementList(elseNode);
@@ -324,7 +324,7 @@ void IRGenerator::generateWhile(Node *node) {
     currentBlock->instructions.emplace_back(ir::Opcode::Goto, "", "", "", conditionBlock->name);
     currentBlock->trueExit = conditionBlock;
 
-    // Condition evaluation
+    // condition evaluation
     currentBlock = conditionBlock;
     string condTemp = generateExpression(node->children[0]);
     currentBlock->instructions.emplace_back(ir::Opcode::IfTrueGoto, "", condTemp, "", bodyBlock->name);
@@ -332,13 +332,13 @@ void IRGenerator::generateWhile(Node *node) {
     currentBlock->trueExit = bodyBlock;
     currentBlock->falseExit = exitBlock;
 
-    // Body
+    // body
     currentBlock = bodyBlock;
     generateStatementList(node->children[1]);
     currentBlock->instructions.emplace_back(ir::Opcode::Goto, "", "", "", conditionBlock->name);
     currentBlock->trueExit = conditionBlock;
 
-    // Exit
+    // exit
     currentBlock = exitBlock;
 }
 
@@ -393,7 +393,7 @@ std::string IRGenerator::generateIdentifier(Node *node) {
         return node->value;
     }
 
-    // Some parser nodes wrap identifiers in lists/containers.
+    // some parser nodes wrap identifiers in lists/containers.
     if (!node->children.empty()) {
         return generateIdentifier(node->children[0]);
     }
@@ -548,7 +548,7 @@ std::string IRGenerator::generateExpression(Node *expr) {
     }
 
     if (!expr->children.empty()) {
-        // Attempt to evaluate nested expression.
+        // attempt to evaluate nested expression.
         return generateExpression(expr->children.front());
     }
 

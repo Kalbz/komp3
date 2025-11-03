@@ -25,7 +25,7 @@ bool isNumber(const string &value) {
     return true;
 }
 
-} // namespace
+}
 
 AssemblyGenerator::AssemblyGenerator(const ir::Module &module)
     : irModule(module) {}
@@ -70,7 +70,7 @@ bool AssemblyGenerator::writeToFile(const string &filename) {
 
         string fnLabel = sanitize(fnPtr->name);
 
-        // Collect variables and detect booleans
+        // collect variables and detect booleans
         set<string> variables;
         unordered_set<string> boolVars;
         auto considerVar = [&](const string &raw) {

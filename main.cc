@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 		yylex();
 	else
 	{
-		// First pass: collect all lexical errors without running the parser
+		// first round collect all lexical errors without running the parser
         bool runLexCheck = (argc > 1 && argv[1] && strstr(argv[1], "lexical_errors") != nullptr);
 
         if (runLexCheck && yyin && yyin != stdin)

@@ -12,7 +12,7 @@
 #include <utility>
 #include <vector>
 
-// Simple debugging macro that can be enabled from the build system.
+// simple debugging macro that can be enabled from the build system.
 #ifndef DEBUG_IR
 #define DEBUG_IR 0
 #endif
